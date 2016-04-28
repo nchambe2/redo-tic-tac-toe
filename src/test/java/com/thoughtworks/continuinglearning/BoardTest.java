@@ -9,7 +9,6 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 public class BoardTest {
@@ -38,11 +37,32 @@ public class BoardTest {
         );
     }
 
-//    @Test
-//    public void shouldUpdateBoardWhenUserMarksASquare() throws IOException {
-//        board.mark("1");
-//
-//        verify(board).drawBoard();
-//    }
+    @Test
+    public void shouldUpdateBoardWithXWhenUserMarksEvenSquare() throws IOException {
+
+        board.mark("2");
+
+        verify(printStream).println(
+                "1|X|3\n" +
+                "-----\n" +
+                "4|5|6\n" +
+                "-----\n" +
+                "7|8|9"
+        );
+    }
+
+    @Test
+    public void shouldUpdateBoardWithOWhenUserMarksOddSquare() {
+        board.mark("3");
+
+        verify(printStream).println(
+                "1|2|O\n" +
+                "-----\n" +
+                "4|5|6\n" +
+                "-----\n" +
+                "7|8|9"
+        );
+
+    }
 
 }

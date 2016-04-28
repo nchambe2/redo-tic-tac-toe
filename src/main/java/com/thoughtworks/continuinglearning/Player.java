@@ -28,6 +28,9 @@ public class Player {
 
     public void makeMove() {
        String userChoice = getBufferedReaderInput();
-       board.mark(userChoice);
+       while ( !userChoice.equals("Quit")) {
+           board.mark(userChoice);
+           userChoice = getBufferedReaderInput();
+       }
     }
 }

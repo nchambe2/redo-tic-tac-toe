@@ -19,6 +19,7 @@ public class PlayerTest {
     private Board board;
     private PrintStream printStream;
 
+
     @Before
     public void setUp() {
         bufferedReader = mock(BufferedReader.class);
@@ -29,21 +30,29 @@ public class PlayerTest {
 
     @Test
     public void shouldCaptureUserMove() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1");
-
-        player.makeMove();
-
-        verify(board).mark("1");
-
-    }
-
-    @Test
-    public void shouldCaptureUserMoveWhenInputIsTwo() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("2");
+        userSelectsEvenNumberOptionThenQuits();
 
         player.makeMove();
 
         verify(board).mark("2");
 
     }
+
+    private void userSelectsEvenNumberOptionThenQuits() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("2").thenReturn("Quit");
+    }
+
+    @Test
+    public void shouldCaptureUserMoveWhenInputIsTwo() throws IOException {
+        userSelectsOddNumberOptionThenQuits();
+        player.makeMove();
+
+        verify(board).mark("1");
+
+    }
+
+    private void userSelectsOddNumberOptionThenQuits() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("1").thenReturn("Quit");
+    }
+
 }
