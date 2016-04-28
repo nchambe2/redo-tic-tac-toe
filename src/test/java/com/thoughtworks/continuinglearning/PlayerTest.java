@@ -7,14 +7,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by nicollettec on 4/28/16.
- */
 
 public class PlayerTest {
 
@@ -35,9 +31,9 @@ public class PlayerTest {
     public void shouldCaptureUserMove() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
 
-        player.makeMove(bufferedReader);
+        player.makeMove();
 
-        verify(board).mark(bufferedReader);
+        verify(board).mark("1");
 
     }
 
@@ -45,9 +41,9 @@ public class PlayerTest {
     public void shouldCaptureUserMoveWhenInputIsTwo() throws IOException {
         when(bufferedReader.readLine()).thenReturn("2");
 
-        player.makeMove(bufferedReader);
+        player.makeMove();
 
-        verify(board).mark(bufferedReader);
+        verify(board).mark("2");
 
     }
 }

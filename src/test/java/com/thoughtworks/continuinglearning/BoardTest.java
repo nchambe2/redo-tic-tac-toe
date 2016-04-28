@@ -3,10 +3,7 @@ package com.thoughtworks.continuinglearning;
 import org.junit.Test;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -17,9 +14,8 @@ public class BoardTest {
 
     @Test
     public void shouldDrawBoard(){
-        List<Integer> boardArray = new ArrayList();
         PrintStream printStream = mock(PrintStream.class);
-        Board board = new Board(boardArray, printStream);
+        Board board = new Board(printStream);
 
         board.drawBoard();
 

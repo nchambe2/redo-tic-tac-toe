@@ -1,6 +1,7 @@
 package com.thoughtworks.continuinglearning;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 /**
  * Created by nicollettec on 4/28/16.
@@ -15,7 +16,18 @@ public class Player {
         this.bufferedReader = bufferedReader;
     }
 
-    public void makeMove(BufferedReader bufferedReader) {
-       board.mark(bufferedReader);
+    private String getBufferedReaderInput() {
+        try {
+            return  bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void makeMove() {
+       String userChoice = getBufferedReaderInput();
+       board.mark(userChoice);
     }
 }

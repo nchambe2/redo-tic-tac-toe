@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 
-import static org.hamcrest.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -38,7 +37,7 @@ public class GameTest {
     public void shouldGetPlayerMoveAfterGameStarts(){
         game.start();
 
-        verify(player).makeMove(bufferedReader);
+        verify(player).makeMove();
     }
 
 }

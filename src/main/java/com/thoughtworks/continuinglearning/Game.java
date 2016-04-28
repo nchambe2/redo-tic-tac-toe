@@ -21,6 +21,6 @@ public class Game {
 
     public void start(){
         board.drawBoard();
-        player.makeMove(bufferedReader);
+        player.makeMove();
     }
 }
