@@ -1,43 +1,38 @@
 package com.thoughtworks.continuinglearning;
 
+
+import com.sun.media.jfxmedia.events.PlayerStateEvent;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class GameTest {
 
-    private Board board;
     private Game game;
-    private PrintStream printStream;
+    private Board board;
     private Player player;
-    private BufferedReader bufferedReader;
 
     @Before
-    public void setup(){
-        board = mock(Board.class);
-        printStream = mock(PrintStream.class);
-        player = mock(Player.class);
-        bufferedReader = mock(BufferedReader.class);
-        game = new Game(printStream, board, player, bufferedReader);
+    public void setUp() {
+       board = mock(Board.class);
+       player = mock(Player.class);
+       game = new Game(board, player);
     }
 
     @Test
-    public void shouldPrintGameBoardWhenApplicationStarts(){
+    public void shouldDrawBoardWhenApplicationStarts() {
+
         game.start();
 
-        verify(board).drawBoard();
+        verify(board).draw();
     }
 
     @Test
-    public void shouldGetPlayerMoveAfterGameStarts(){
+    public void shouldRedrawBoardWhenUserEntersInput() {
         game.start();
 
         verify(player).makeMove();
     }
-
 }

@@ -1,26 +1,17 @@
 package com.thoughtworks.continuinglearning;
 
-import java.io.BufferedReader;
-import java.io.PrintStream;
-
-/**
- * Created by nicollettec on 4/28/16.
- */
 public class Game {
     private Board board;
-    private PrintStream printStream;
     private Player player;
-    private BufferedReader bufferedReader;
 
-    public Game(PrintStream printStream, Board board, Player player, BufferedReader bufferedReader) {
-        this.printStream = printStream;
+    public Game(Board board, Player player) {
+
         this.board = board;
         this.player = player;
-        this.bufferedReader = bufferedReader;
     }
 
-    public void start(){
-        board.drawBoard();
+    public void start() {
+        board.draw();
         player.makeMove();
     }
 }
