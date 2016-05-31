@@ -24,8 +24,8 @@ public class TicTacToe {
         Boolean allLocationsTaken = false;
         Integer numOfEmptyLocations = 9;
         Board board = new Board(printStream, prompter, boardState, allLocationsTaken, numOfEmptyLocations);
-        Player player1 = new Player(board, "X");
-        Player player2 = new Player(board, "O");
+        Player player1 = new Player(board, "X", "1", printStream);
+        Player player2 = new Player(board, "O", "2", printStream);
         Game game = new Game(board, player1, player2);
         game.start();
     }

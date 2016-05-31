@@ -44,4 +44,13 @@ public class GameTest {
 
         verify(player2).makeMove();
     }
+
+    @Test
+    public void shouldCheckIfPlayerHasWonWhenPlayerFinishesTurn() {
+        when(board.isFull()).thenReturn(false).thenReturn(true);
+
+        game.start();
+
+        verify(player1).hasWon();
+    }
 }

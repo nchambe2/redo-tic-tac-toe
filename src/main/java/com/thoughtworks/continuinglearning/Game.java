@@ -17,8 +17,10 @@ public class Game {
           board.draw();
           player1.makeMove();
           board.draw();
+          player1.hasWon();
           player2.makeMove();
           board.draw();
+          player2.hasWon();
       }
 
     }

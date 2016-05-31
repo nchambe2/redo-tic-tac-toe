@@ -66,4 +66,21 @@ public class Board {
     }
 
 
+    public Boolean hasWinner() {
+        return isDiagonalWin();
+    }
+
+    private Boolean isDiagonalWin() {
+        if(locations.get(0).equals("X") && locations.get(4).equals("X") && locations.get(8).equals("X")) {
+            return true;
+        } else if(locations.get(2).equals("X") && locations.get(4).equals("X") && locations.get(6).equals("X")) {
+            return true;
+        } else if(locations.get(0).equals("O") && locations.get(4).equals("O") && locations.get(8).equals("O")) {
+            return true;
+        } else if(locations.get(2).equals("O") && locations.get(4).equals("O") && locations.get(6).equals("O")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

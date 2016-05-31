@@ -126,4 +126,22 @@ public class BoardTest {
         assertThat(board.isFull(), is(true));
     }
 
+    @Test
+    public void shouldReturnTrueWhenThereIsThreeInARowHorizontally() {
+        locations.add(0, "X");
+        locations.add(1, "2");
+        locations.add(2, "3");
+        locations.add(3, "4");
+        locations.add(4, "X");
+        locations.add(5, "6");
+        locations.add(6, "7");
+        locations.add(7, "8");
+        locations.add(8, "X");
+        assertThat(board.hasWinner(), is(true));
+    }
+    @Test
+    public void shouldReturnFalseWhenThereIsntThreeInARowHorizontally() {
+        assertThat(board.hasWinner(), is(false));
+    }
+
 }
