@@ -13,10 +13,13 @@ public class Game {
     }
 
     public void start() {
-        board.draw();
-        player1.makeMove();
-        board.draw();
-        player2.makeMove();
-        board.draw();
+     while(!board.isFull()) {
+          board.draw();
+          player1.makeMove();
+          board.draw();
+          player2.makeMove();
+          board.draw();
+      }
+
     }
 }

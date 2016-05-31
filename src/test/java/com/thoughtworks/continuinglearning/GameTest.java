@@ -28,7 +28,7 @@ public class GameTest {
 
         game.start();
 
-        verify(board, times(2)).draw();
+        verify(board, times(3)).draw();
     }
 
     @Test
