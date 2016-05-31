@@ -64,6 +64,6 @@ public class Board {
     public void setNumOfEmptyLocations(int currentNumOfLocations) {
         numOfEmptyLocations -= currentNumOfLocations;
     }
-    
+
 
 }

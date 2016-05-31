@@ -22,7 +22,7 @@ public class BoardTest {
     private Prompter prompter;
     private String symbolX;
     private String symbolO;
-    private List <String> boardState;
+    private List <String> locations;
     private Boolean allLocationsTaken;
     private Integer numOfEmptyLocations;
 
@@ -33,27 +33,32 @@ public class BoardTest {
         prompter = mock(Prompter.class);
         symbolX = "X";
         symbolO = "O";
-        boardState = new ArrayList<>();
-        boardState.add(0, "1");
-        boardState.add(1, "2");
-        boardState.add(2, "3");
-        boardState.add(3, "4");
-        boardState.add(4, "5");
-        boardState.add(5, "6");
-        boardState.add(6, "7");
-        boardState.add(7, "8");
-        boardState.add(8, "9");
+        locations = new ArrayList<>();
+        locations.add(0, "1");
+        locations.add(1, "2");
+        locations.add(2, "3");
+        locations.add(3, "4");
+        locations.add(4, "5");
+        locations.add(5, "6");
+        locations.add(6, "7");
+        locations.add(7, "8");
+        locations.add(8, "9");
         allLocationsTaken = false;
         numOfEmptyLocations = 9;
-        board = new Board(printStream, prompter, boardState, allLocationsTaken, numOfEmptyLocations);
+        board = new Board(printStream, prompter, locations, allLocationsTaken, numOfEmptyLocations);
     }
 
     @Test
     public void shouldDrawBoard(){
-
         board.draw();
 
-        verify(printStream).println(boardState);
+        verify(printStream).println(
+                locations.get(0) + "|" + locations.get(1) + "|" + locations.get(2) + "\n" +
+                "-----" + "\n" +
+                locations.get(3) + "|" + locations.get(4) + "|" + locations.get(5) + "\n" +
+                "-----" + "\n" +
+                locations.get(6) + "|" + locations.get(7) + "|" + locations.get(8) + "\n"
+        );
     }
 
     @Test
@@ -71,7 +76,7 @@ public class BoardTest {
                             "-----\n" +
                             "4|5|6\n" +
                             "-----\n" +
-                            "7|8|9";
+                            "7|8|9\n";
 
         when(prompter.prompt()).thenReturn("1");
 

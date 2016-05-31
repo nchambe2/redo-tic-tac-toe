@@ -4,9 +4,7 @@ package com.thoughtworks.continuinglearning;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class GameTest {
 
@@ -25,7 +23,7 @@ public class GameTest {
 
     @Test
     public void shouldDrawBoardWhenApplicationStarts() {
-
+        when(board.isFull()).thenReturn(false).thenReturn(true);
         game.start();
 
         verify(board, times(3)).draw();
@@ -33,6 +31,7 @@ public class GameTest {
 
     @Test
     public void shouldRecordFirstPlayersMoveWhenBoardHasBeenDrawn() {
+        when(board.isFull()).thenReturn(false).thenReturn(true);
         game.start();
 
         verify(player1).makeMove();
@@ -40,6 +39,7 @@ public class GameTest {
 
     @Test
     public void shouldRecordSecondPlayersMoveWhenBoardHasBeenDrawn() {
+        when(board.isFull()).thenReturn(false).thenReturn(true);
         game.start();
 
         verify(player2).makeMove();
