@@ -9,28 +9,22 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 public class BoardTest {
     private PrintStream printStream;
     private Board board;
-    private String markedBoardString;
-    private Prompter prompter;
     private String symbolX;
     private String symbolO;
     private List <String> locations;
-    private Boolean allLocationsTaken;
     private Integer numOfEmptyLocations;
 
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        prompter = mock(Prompter.class);
         symbolX = "X";
         symbolO = "O";
         locations = new ArrayList<>();
@@ -43,9 +37,8 @@ public class BoardTest {
         locations.add(6, "7");
         locations.add(7, "8");
         locations.add(8, "9");
-        allLocationsTaken = false;
         numOfEmptyLocations = 9;
-        board = new Board(printStream, prompter, locations, allLocationsTaken, numOfEmptyLocations);
+        board = new Board(printStream, locations, numOfEmptyLocations);
     }
 
     @Test
@@ -62,54 +55,22 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldPromptUserForCellToMarkWhenPlayerIsPrompted() {
-        when(prompter.prompt()).thenReturn("1");
-
-        board.mark(symbolX);
-
-        verify(prompter).prompt();
+    public void shouldReturnTrueWhenLocationIsAvailable() {
+        assertThat(board.locationAvailable(1), is(true));
     }
 
     @Test
-    public void shouldMarkXWhenPlayerOneMakesAMove() {
-        markedBoardString = "X|2|3\n" +
-                            "-----\n" +
-                            "4|5|6\n" +
-                            "-----\n" +
-                            "7|8|9\n";
+    public void shouldMarkXWhenPlayerMakesAMove() {
+        board.mark(1, symbolX);
 
-        when(prompter.prompt()).thenReturn("1");
-
-        board.mark(symbolX);
-        board.draw();
-
-        verify(printStream).println(markedBoardString);
+        assertThat(locations.get(0), is(symbolX));
     }
 
     @Test
     public void shouldMarkOWhenPlayer2MakesAMove() {
-        markedBoardString = "1|2|O\n" +
-                            "-----\n" +
-                            "4|5|6\n" +
-                            "-----\n" +
-                            "7|8|9\n";
+        board.mark(3, symbolO);
 
-        when(prompter.prompt()).thenReturn("3");
-
-        board.mark(symbolO);
-        board.draw();
-
-        verify(printStream).println(markedBoardString);
-    }
-
-    @Test
-    public void shouldDisplayLocationTakenMessageWhenPlayerAttemptsToMarkACellThatIsNotAvailable() {
-
-        when(prompter.prompt()).thenReturn("3").thenReturn("3");
-        board.mark(symbolO);
-        board.mark(symbolO);
-
-        verify(printStream).println("Location already taken");
+        assertThat(locations.get(2), is(symbolO));
     }
 
     @Test

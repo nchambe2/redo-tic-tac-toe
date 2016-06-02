@@ -5,16 +5,13 @@ import java.util.List;
 
 public class Board {
     private PrintStream printStream;
-    private Prompter prompter;
     private List<String> locations;
     private Boolean allLocationsTaken;
     private Integer numOfEmptyLocations;
 
-    public Board(PrintStream printStream, Prompter prompter, List<String> locations, Boolean allLocationsTaken, Integer numOfEmptyLocations) {
+    public Board(PrintStream printStream, List<String> locations, Integer numOfEmptyLocations) {
         this.printStream = printStream;
-        this.prompter = prompter;
         this.locations = locations;
-        this.allLocationsTaken = allLocationsTaken;
         this.numOfEmptyLocations = numOfEmptyLocations;
     }
 
@@ -28,6 +25,15 @@ public class Board {
         );
     }
 
+   public boolean locationAvailable(Integer locationToMark) {
+       boolean isLocationEmpty = !locations.get(locationToMark).equals("X") && !locations.get(locationToMark).equals("O");
+       return isLocationEmpty;
+   }
+
+    public void mark(Integer locationToMark, String symbol) {
+        locations.set(locationToMark - 1, symbol);
+    }
+
     public Boolean isFull() {
         if (getNumOfEmptyLocations().equals(0)) {
            printStream.println("Game is a draw");
@@ -37,25 +43,6 @@ public class Board {
         }
     }
 
-    public void mark(String symbol) {
-        String cellToMark = prompter.prompt();
-        Boolean locationAvailability = checkLocation(cellToMark);
-
-        if(locationAvailability) {
-            locations.set(Integer.parseInt(cellToMark) - 1, symbol);
-        } else {
-            printStream.println("Location already taken");
-        }
-    }
-
-    private Boolean checkLocation(String cell) {
-        if(locations.contains(cell)) {
-            setNumOfEmptyLocations(1);
-            return true;
-        } else {
-            return false;
-        }
-   }
 
     public Integer getNumOfEmptyLocations() {
        return numOfEmptyLocations;
@@ -83,4 +70,5 @@ public class Board {
             return false;
         }
     }
+
 }
