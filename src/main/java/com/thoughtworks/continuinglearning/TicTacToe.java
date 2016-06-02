@@ -10,22 +10,20 @@ public class TicTacToe {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Prompter prompter = new Prompter(bufferedReader);
-        List<String> boardState = new ArrayList<>();
-        boardState.add(0, "1");
-        boardState.add(1, "2");
-        boardState.add(2, "3");
-        boardState.add(3, "4");
-        boardState.add(4, "5");
-        boardState.add(5, "6");
-        boardState.add(6, "7");
-        boardState.add(7, "8");
-        boardState.add(8, "9");
-        Boolean allLocationsTaken = false;
+        List<String> locations = new ArrayList<>();
+        locations.add(0, "1");
+        locations.add(1, "2");
+        locations.add(2, "3");
+        locations.add(3, "4");
+        locations.add(4, "5");
+        locations.add(5, "6");
+        locations.add(6, "7");
+        locations.add(7, "8");
+        locations.add(8, "9");
         Integer numOfEmptyLocations = 9;
-        Board board = new Board(printStream, prompter, boardState, allLocationsTaken, numOfEmptyLocations);
-        Player player1 = new Player(board, "X", "1", printStream);
-        Player player2 = new Player(board, "O", "2", printStream);
+        Board board = new Board(printStream, locations, numOfEmptyLocations);
+        Player player1 = new Player(board, "X", "1", printStream, bufferedReader);
+        Player player2 = new Player(board, "O", "2", printStream, bufferedReader);
         Game game = new Game(board, player1, player2);
         game.start();
     }
