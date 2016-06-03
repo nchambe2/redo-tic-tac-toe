@@ -19,7 +19,6 @@ public class BoardTest {
     private String symbolX;
     private String symbolO;
     private List <String> locations;
-    private Integer numOfEmptyLocations;
 
 
     @Before
@@ -28,17 +27,10 @@ public class BoardTest {
         symbolX = "X";
         symbolO = "O";
         locations = new ArrayList<>();
-        locations.add(0, "1");
-        locations.add(1, "2");
-        locations.add(2, "3");
-        locations.add(3, "4");
-        locations.add(4, "5");
-        locations.add(5, "6");
-        locations.add(6, "7");
-        locations.add(7, "8");
-        locations.add(8, "9");
-        numOfEmptyLocations = 9;
-        board = new Board(printStream, locations, numOfEmptyLocations);
+        for(int i = 0; i < 9; i++) {
+            locations.add(i, Integer.toString(i + 1));
+        }
+        board = new Board(printStream, locations);
     }
 
     @Test
@@ -46,11 +38,11 @@ public class BoardTest {
         board.draw();
 
         verify(printStream).println(
-                locations.get(0) + "|" + locations.get(1) + "|" + locations.get(2) + "\n" +
-                "-----" + "\n" +
-                locations.get(3) + "|" + locations.get(4) + "|" + locations.get(5) + "\n" +
-                "-----" + "\n" +
-                locations.get(6) + "|" + locations.get(7) + "|" + locations.get(8) + "\n"
+                "1|2|3\n" +
+                "-----\n" +
+                "4|5|6\n" +
+                "-----\n" +
+                "7|8|9\n"
         );
     }
 
@@ -74,17 +66,17 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldReturnFalseWhenBoardIsNotFull() {
-        board.setNumOfEmptyLocations(0);
+    public void shouldReturnTrueWhenThereIsAnEmptySpace() {
 
-        assertThat(board.isFull(), is(false));
+        assertThat(board.isThereAnEmptySpace(), is(true));
     }
 
     @Test
-    public void shouldReturnTrueWhenBoardIsFull() {
-        board.setNumOfEmptyLocations(9);
-
-        assertThat(board.isFull(), is(true));
+    public void shouldReturnFalseWhenThereIsNoEmptySpaces() {
+        for(int i = 0; i < 9; i++) {
+            locations.set(i, symbolX);
+        }
+        assertThat(board.isThereAnEmptySpace(), is(false));
     }
 
     @Test
@@ -99,10 +91,6 @@ public class BoardTest {
         locations.add(7, "8");
         locations.add(8, "X");
         assertThat(board.hasWinner(), is(true));
-    }
-    @Test
-    public void shouldReturnFalseWhenThereIsntThreeInARowHorizontally() {
-        assertThat(board.hasWinner(), is(false));
     }
 
 }

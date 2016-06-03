@@ -6,13 +6,10 @@ import java.util.List;
 public class Board {
     private PrintStream printStream;
     private List<String> locations;
-    private Boolean allLocationsTaken;
-    private Integer numOfEmptyLocations;
 
-    public Board(PrintStream printStream, List<String> locations, Integer numOfEmptyLocations) {
+    public Board(PrintStream printStream, List<String> locations) {
         this.printStream = printStream;
         this.locations = locations;
-        this.numOfEmptyLocations = numOfEmptyLocations;
     }
 
     public void draw() {
@@ -26,7 +23,8 @@ public class Board {
     }
 
    public boolean locationAvailable(Integer locationToMark) {
-       boolean isLocationEmpty = !locations.get(locationToMark).equals("X") && !locations.get(locationToMark).equals("O");
+       boolean isLocationEmpty = !locations.get(locationToMark - 1).equals("X") && !locations.get(locationToMark).equals("O");
+
        return isLocationEmpty;
    }
 
@@ -34,24 +32,32 @@ public class Board {
         locations.set(locationToMark - 1, symbol);
     }
 
-    public Boolean isFull() {
-        if (getNumOfEmptyLocations().equals(0)) {
-           printStream.println("Game is a draw");
-           return allLocationsTaken = true;
-        } else {
-            return allLocationsTaken;
+    //value | isX    | isO    | isX && isY
+    //1     | true   | true   | true
+    //2     | true   | true   | true
+    //3     | true   | true   | true
+    //4     | true   | true   | true
+    //5     | true   | true   | true
+    //6     | true   | true   | true
+    //7     | true   | true   | true
+    //8     | true   | true   | true
+    //9     | true   | true   | true
+    //X     | true   | false  | false
+
+
+    public Boolean isThereAnEmptySpace() {
+        for(String location :locations) {
+            if(isLocationEmpty(location)) {
+                return true;
+            }
         }
+
+        return false;
     }
 
-
-    public Integer getNumOfEmptyLocations() {
-       return numOfEmptyLocations;
+    private boolean isLocationEmpty(String location) {
+        return !location.equals("X") && !location.equals("O");
     }
-
-    public void setNumOfEmptyLocations(int currentNumOfLocations) {
-        numOfEmptyLocations -= currentNumOfLocations;
-    }
-
 
     public Boolean hasWinner() {
         return isDiagonalWin();

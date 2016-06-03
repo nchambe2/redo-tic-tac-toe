@@ -23,7 +23,7 @@ public class GameTest {
 
     @Test
     public void shouldDrawBoardWhenApplicationStarts() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isThereAnEmptySpace()).thenReturn(false).thenReturn(true);
         game.start();
 
         verify(board, times(3)).draw();
@@ -31,7 +31,7 @@ public class GameTest {
 
     @Test
     public void shouldRecordFirstPlayersMoveWhenBoardHasBeenDrawn() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isThereAnEmptySpace()).thenReturn(false).thenReturn(true);
         game.start();
 
         verify(player1).makeMove();
@@ -39,7 +39,7 @@ public class GameTest {
 
     @Test
     public void shouldRecordSecondPlayersMoveWhenBoardHasBeenDrawn() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isThereAnEmptySpace()).thenReturn(false).thenReturn(true);
         game.start();
 
         verify(player2).makeMove();
@@ -47,7 +47,7 @@ public class GameTest {
 
     @Test
     public void shouldCheckIfPlayerHasWonWhenPlayerFinishesTurn() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isThereAnEmptySpace()).thenReturn(false).thenReturn(true);
 
         game.start();
 

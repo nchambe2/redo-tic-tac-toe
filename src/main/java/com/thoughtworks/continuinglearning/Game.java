@@ -13,7 +13,7 @@ public class Game {
     }
 
     public void start() {
-     while(!board.isFull()) {
+    while(board.isThereAnEmptySpace()) {
           board.draw();
           player1.makeMove();
           board.draw();
@@ -21,7 +21,7 @@ public class Game {
           player2.makeMove();
           board.draw();
           player2.hasWon();
-      }
+     }
 
     }
 }
